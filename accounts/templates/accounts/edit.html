@@ -1,0 +1,9 @@
+<form method="post" action="./edit">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {{ form.errors.username }}
+    {{ form.username }}
+    {{ form.errors.email }}
+    {{ form.email }}
+    <input type="submit" value="Update">
+</form>

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}TODOの一覧{% endblock title %}
+
+{% block extrahead %}
+<style>
+table {
+  margin-top: 8px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+    <h3 class="page-header">TODOの一覧</h3>
+    <a href="{% url 'todo:todo_add' %}" class="btn btn-default btn-sm">追加</a>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>名前</th>
+          <th>詳細</th>
+          <th>メモ</th>
+          <th>作成日</th>
+          <th>完了</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for todo in todos %}
+        {% if todo.dones == "N" %}
+        <tr>
+          <td>{{ todo.name }}</td>
+          <td>{{ todo.detail }}</td>
+          <td>{{ todo.memo }}</td>
+          <td>{{ todo.created_at }}</td>
+          <td>{{ todo.dones }}</td>
+          <td>
+            <a href="{% url 'todo:todo_mod' todo_id=todo.id %}" class="btn btn-default btn-sm">修正</a>
+            <a href="{% url 'todo:todo_del' todo_id=todo.id %}" class="btn btn-default btn-sm">削除</a>
+          </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock content %}
